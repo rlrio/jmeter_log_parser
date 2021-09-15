@@ -7,15 +7,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class InfoService {
-    private List<Record> notes;
+    private List<Record> records;
 
-    public InfoService(List<Record> notes) {
-        this.notes = notes;
+    public InfoService(List<Record> records) {
+        this.records = records;
     }
 
     public void printErrorStatistics() {
-        double totalRequests = notes.get(notes.size() - 1).getId();
-        notes.stream()
+        double totalRequests = records.get(records.size() - 1).getId();
+        records.stream()
                 .filter(note -> !note.isSuccess())
                 .collect(Collectors.groupingBy(Record::getResponseCode))
                 .forEach((key, value) -> printMessage(key + ": " + value.size() + " " + value.size() / totalRequests * 100 + "%\n"));
@@ -23,7 +23,7 @@ public class InfoService {
     }
 
     public void printErrorStatistics1() {
-        Map<Integer, List<Record>> collect = notes.stream()
+        Map<Integer, List<Record>> collect = records.stream()
                 .filter(note -> !note.isSuccess())
                 .collect(Collectors.groupingBy(Record::getResponseCode));
         collect.forEach((key, value) -> {
