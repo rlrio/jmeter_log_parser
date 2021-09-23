@@ -15,7 +15,7 @@ public class InfoService {
     }
 
     public void printErrorStatisticsTotal(PrintService service, int limit) {
-        service.print("Error Statistics Total\n");
+        service.print("ErrorStatisticsTotal\n");
         double totalRequests = records.get(records.size() - 1).getId();
         records.stream()
                 .filter(note -> !note.isSuccess())
@@ -25,7 +25,7 @@ public class InfoService {
     }
 
     public void printErrorStatisticsByEachThread(PrintService service, int limit) {
-        service.print("Error Statistics By Each Thread\n");
+        service.print("ErrorStatisticsByEachThread\n");
         groupByResponseCode().forEach((key, value) -> {
             service.print(key.toString() + "\n");
             Stream<Map.Entry<String, List<Record>>> sorted = value.stream()
@@ -39,7 +39,7 @@ public class InfoService {
     }
 
     public void printErrorStatisticsByThreadName(PrintService service, int limit) {
-        service.print("Error Statistics By Thread Name\n");
+        service.print("ErrorStatisticsByThreadName\n");
         groupByResponseCode().forEach((key, value) -> {
             service.print(key.toString() + "\n");
             Stream<Map.Entry<String, List<Record>>> sorted = value.stream()
@@ -53,7 +53,7 @@ public class InfoService {
     }
 
     public void printErrorStatisticsByURL(PrintService service, int limit) {
-        service.print("Error Statistics By URL\n");
+        service.print("ErrorStatisticsByURL\n");
         groupByResponseCode().forEach((key, value) -> {
             service.print(key.toString() + "\n");
             Stream<Map.Entry<String, List<Record>>> sorted = value.stream()
