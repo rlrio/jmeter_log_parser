@@ -21,7 +21,6 @@ You have to set parameters such as path to JMeter csv file, path to the output f
 **If you do not set any other parameters except for the source file path, the program will print data of all available methods to the Console.**
 
 ---
-
 Example for CLI command to run the program after compilation:  
 ***java Main /Users/user/Documents/all.csv /Users/user/Documents/output.csv url 10***
 ---
