@@ -10,7 +10,12 @@ public class PrintServiceImpl implements PrintService {
             "Except for the path to JMeter file the other arguments are optional.\n" +
             "If you do not add path to output file the program will print the result to the Console.\n" +
             "If you do not add the name or part of the name of the method all methods will be invoked.\n" +
-            "If you do not add the number to limit the amount of lines of the output, all lines will be printed.";
+            "If you do not add the number to limit the amount of lines of the output, all lines will be printed.\n" +
+            "\nFor now there only 4 methods available in this app:\n" +
+            "- printErrorStatisticsTotal\n" +
+            "- printErrorStatisticsByEachThread\n" +
+            "- printErrorStatisticsByThreadName\n" +
+            "- printErrorStatisticsByURL";
     private final int mode;
     private File file;
 
