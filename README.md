@@ -21,3 +21,7 @@ If you do not set any other parameters except for the source file path, the prog
 
 Example for CLI command to run the program after compilation:  
 ***java Main /Users/user/Documents/all.csv /Users/user/Documents/output.csv url 10***
+---
+You can also run a jar file which you can find in artifacts directory:
+
+***java -jar jmeter_log_parser.jar /Users/user/Documents/all.csv /Users/user/Documents/output.csv url 10***

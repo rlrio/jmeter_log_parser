@@ -9,46 +9,53 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
+import static service.PrintService.printMessage;
+import static service.PrintServiceImpl.HELP_MESSAGE;
+
 public class Main {
     public static void main(String[] args) {
         if (args.length > 0) {
-            String fileFrom = args[0];
-            String fileTo = "0";
-            String methodName = "0";
-            int params = 0;
-            int mode = 0;
-            switch (args.length) {
-                case 2: {
-                    if (args[1].contains("/") || args[1].contains("\\")) {
-                        fileTo = args[1];
-                        mode = 1;
-                    } else {
-                        methodName = args[1];
+            if (args[0].contains("help")) {
+                printMessage(HELP_MESSAGE);
+            } else {
+                String fileFrom = args[0];
+                String fileTo = "0";
+                String methodName = "0";
+                int params = 0;
+                int mode = 0;
+                switch (args.length) {
+                    case 2: {
+                        if (args[1].contains("/") || args[1].contains("\\")) {
+                            fileTo = args[1];
+                            mode = 1;
+                        } else {
+                            methodName = args[1];
+                        }
+                        break;
                     }
-                    break;
-                }
-                case 3: {
-                    if (args[1].contains("/") || args[1].contains("\\")) {
+                    case 3: {
+                        if (args[1].contains("/") || args[1].contains("\\")) {
+                            fileTo = args[1];
+                            methodName = args[2];
+                            mode = 1;
+                        } else {
+                            methodName = args[1];
+                            params = Integer.parseInt(args[2]);
+                        }
+                        break;
+                    }
+                    case 4: {
                         fileTo = args[1];
                         methodName = args[2];
+                        params = Integer.parseInt(args[3]);
                         mode = 1;
-                    } else {
-                        methodName = args[1];
-                        params = Integer.parseInt(args[2]);
+                        break;
                     }
-                    break;
                 }
-                case 4: {
-                    fileTo = args[1];
-                    methodName = args[2];
-                    params = Integer.parseInt(args[3]);
-                    mode = 1;
-                    break;
-                }
+                printStats(fileFrom, fileTo, methodName, params, mode);
             }
-            printStats(fileFrom, fileTo, methodName, params, mode);
         } else {
-            System.out.println("No args");
+            printMessage("No args were found\n" + HELP_MESSAGE);
         }
     }
 
@@ -71,6 +78,8 @@ public class Main {
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    printMessage(String.format("Method with name %s has not been found", methodName));
                 }
             }
         }

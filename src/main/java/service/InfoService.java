@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static service.PrintService.printMessage;
+
 public class InfoService {
     private List<Record> records;
 
@@ -15,17 +17,17 @@ public class InfoService {
     }
 
     public void printErrorStatisticsTotal(PrintService service, int limit) {
-        service.print("ErrorStatisticsTotal\n");
+        printMessage("ErrorStatisticsTotal\n");
         double totalRequests = records.get(records.size() - 1).getId();
         records.stream()
                 .filter(note -> !note.isSuccess())
                 .collect(Collectors.groupingBy(Record::getResponseCode))
                 .forEach((key, value) -> service.print(key + ": " + value.size() + " " + value.size() / totalRequests * 100 + "%\n"));
-        service.print("\n");
+        printMessage("\n");
     }
 
     public void printErrorStatisticsByEachThread(PrintService service, int limit) {
-        service.print("ErrorStatisticsByEachThread\n");
+        printMessage("ErrorStatisticsByEachThread\n");
         groupByResponseCode().forEach((key, value) -> {
             service.print(key.toString() + "\n");
             Stream<Map.Entry<String, List<Record>>> sorted = value.stream()
@@ -35,11 +37,11 @@ public class InfoService {
                     .sorted((o1, o2) -> Integer.compare(o2.getValue().size(), o1.getValue().size()));
             printLimit(service, sorted, limit);
         });
-        service.print("\n");
+        printMessage("\n");
     }
 
     public void printErrorStatisticsByThreadName(PrintService service, int limit) {
-        service.print("ErrorStatisticsByThreadName\n");
+        printMessage("ErrorStatisticsByThreadName\n");
         groupByResponseCode().forEach((key, value) -> {
             service.print(key.toString() + "\n");
             Stream<Map.Entry<String, List<Record>>> sorted = value.stream()
@@ -49,11 +51,11 @@ public class InfoService {
                     .sorted((o1, o2) -> Integer.compare(o2.getValue().size(), o1.getValue().size()));
             printLimit(service, sorted, limit);
         });
-        service.print("\n");
+        printMessage("\n");
     }
 
     public void printErrorStatisticsByURL(PrintService service, int limit) {
-        service.print("ErrorStatisticsByURL\n");
+        printMessage("ErrorStatisticsByURL\n");
         groupByResponseCode().forEach((key, value) -> {
             service.print(key.toString() + "\n");
             Stream<Map.Entry<String, List<Record>>> sorted = value.stream()
@@ -63,7 +65,7 @@ public class InfoService {
                     .sorted((o1, o2) -> Integer.compare(o2.getValue().size(), o1.getValue().size()));
             printLimit(service, sorted, limit);
         });
-        service.print("\n");
+        printMessage("\n");
     }
 
     private Map<Integer, List<Record>> groupByResponseCode() {
