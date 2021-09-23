@@ -15,5 +15,9 @@ To run the program you should run the Main class in your IDE or compile and then
 
 You have to set parameters such as path to JMeter csv file, path to the output file (optional), part of the name of invoke method like "total" or "thread" or "url" (optional), and number to limit the output lines for example 5 for top 5 errors or 10 for top 10 threads.
 
+
+If you do not set any other parameters except for the source file path, the program will print data of all available methods to the Console.
+
+
 Example for CLI command to run the program after compilation:  
 ***java Main /Users/user/Documents/all.csv /Users/user/Documents/output.csv url 10***
